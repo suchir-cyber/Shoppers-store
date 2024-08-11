@@ -14,7 +14,8 @@ urlpatterns = [
     path('contact/',views.Contact_Page,name = 'contact'),
     path('register/',views.HandleRegister,name = 'register'),
     path('login/',views.HandleLogin,name = 'login'),
-    path('logout/',views.HandleLogout, name = 'logout')
+    path('logout/',views.HandleLogout, name = 'logout'),
+    path('cart/cart_detail/',views.CART,name = 'cart_details')
 ] 
 
 urlpatterns += static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
