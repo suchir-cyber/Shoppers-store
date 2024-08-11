@@ -141,3 +141,7 @@ def HandleLogin(request):
             return redirect('login')
 
     return render(request,'Registration/auth.html')
+
+def HandleLogout(request):
+    logout(request)
+    return redirect('home')
