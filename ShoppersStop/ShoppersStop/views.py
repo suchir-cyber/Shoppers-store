@@ -62,3 +62,13 @@ def PRODUCT(request):
         'brand' : brand
     }
     return render(request,'Main/product.html',context)
+
+
+def SEARCH(request):
+    query = request.GET.get('query')
+    products = Product.objects.filter(name__icontains = query)
+
+    context = {
+        'products' : products
+    }
+    return render(request,'Main/search.html',context)
