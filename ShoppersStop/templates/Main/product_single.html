@@ -40,7 +40,7 @@
                     <h2>{{ prod.name | truncatewords:20}}</h2>
                     <div class="pricing-meta">
                         <ul class="d-flex">
-                            <li class="new-price">{{ prod.price }}</li>
+                            <li class="new-price">${{ prod.price }}</li>
                         </ul>
                     </div>
                     <div class="pro-details-rating-wrap">
@@ -53,7 +53,7 @@
                         </div>
                         <span class="read-review"><a class="reviews" href="#">(5 Customer Review)</a></span>
                     </div>
-                    <p class="mt-30px">{{ prod.description | truncatewords:50}}</p>
+                    <p class="mt-30px">{{ prod.description | truncatewords:50 | safe}}</p>
                     <div class="pro-details-categories-info pro-details-same-style d-flex m-0">
                         <span>SKU:</span>
                         <ul class="d-flex">
@@ -107,14 +107,14 @@
                         <div id="des-details2" class="tab-pane">
                             <div class="product-anotherinfo-wrapper text-start">
                                 <ul>
-                                    <li>{{ prod.information }}</li>
+                                    <li>{{ prod.information | safe}}</li>
                                 </ul>
                             </div>
                         </div>
                         <div id="des-details1" class="tab-pane active">
                             <div class="product-description-wrapper">
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor incidid ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip efgx ea co consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occae cupidatat non proident, sunt in culpa qui
+                                    {{ prod.description | safe }}
                                 </p>
                             </div>
                         </div>

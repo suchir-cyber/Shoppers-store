@@ -673,7 +673,7 @@
                                 </div>
                                 <span class="read-review"><a class="reviews" href="#">( 2 Review )</a></span>
                             </div>
-                            <p class="mt-30px">{{item.description |truncatewords:50}}</p>
+                            <p class="mt-30px">{{item.description |truncatewords:50 | safe}}</p>
                             <div class="pro-details-categories-info pro-details-same-style d-flex m-0">
                                 <span>SKU:</span>
                                 <ul class="d-flex">
