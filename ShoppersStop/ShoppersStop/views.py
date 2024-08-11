@@ -17,10 +17,17 @@ def PRODUCT(request):
     prices = Filter_Price.objects.all()
     color = Color.objects.all()
     brand = Brand.objects.all()
+
     CATID = request.GET.get('categories')
+    PRICE_FILTER_ID = request.GET.get('prices')
+    COLOR_ID = request.GET.get('color')
 
     if CATID:
-        products = Product.objects.filter(categories = CATID)
+        products = Product.objects.filter(categories = CATID,status = 'Publish')
+    elif PRICE_FILTER_ID:
+        products = Product.objects.filter(filter_price = PRICE_FILTER_ID,status = 'Publish')
+    elif COLOR_ID:
+        products = Product.objects.filter(color = COLOR_ID,status = 'Publish')
     else:
         products = Product.objects.filter(status = 'Publish')
 

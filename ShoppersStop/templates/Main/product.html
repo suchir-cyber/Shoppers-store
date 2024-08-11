@@ -186,7 +186,7 @@
                                 
                                 {% for item in prices%}
 
-                                <li><a href="#" class="selected m-0"> {{item.prices}} </a></li>
+                                <li><a href="/products/?prices={{item.id}}" class="selected m-0"> {{item.prices}} </a></li>
                             
                                 {% endfor %}
 
@@ -202,7 +202,7 @@
 
                                 {% for col in color %}
 
-                                <li><a href="#" class="color" style="background-color:{{col.code}}"></a></li>
+                                <li><a href="/products/?color={{col.id}}" class="color" style="background-color:{{col.code}}"></a></li>
 
                                 {% endfor %}
                                 
