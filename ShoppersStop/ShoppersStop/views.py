@@ -108,3 +108,7 @@ def Contact_Page(request):
             return redirect('contact')
         
     return render(request,'Main/contact.html')
+
+
+def AUTH(request):
+    return render(request,'Registration/auth.html')

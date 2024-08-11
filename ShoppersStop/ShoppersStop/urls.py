@@ -11,7 +11,8 @@ urlpatterns = [
     path('products/',views.PRODUCT,name = 'products'),
     path('products/<str:id>',views.PRODUCT_DETAIL_PAGE,name = 'product_detail'),
     path('search/',views.SEARCH,name = 'search'),
-    path('contact/',views.Contact_Page,name = 'contact')
+    path('contact/',views.Contact_Page,name = 'contact'),
+    path('auth/',views.AUTH,name = 'auth')
 ] 
 
 urlpatterns += static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
