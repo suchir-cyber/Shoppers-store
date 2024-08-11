@@ -12,7 +12,8 @@ urlpatterns = [
     path('products/<str:id>',views.PRODUCT_DETAIL_PAGE,name = 'product_detail'),
     path('search/',views.SEARCH,name = 'search'),
     path('contact/',views.Contact_Page,name = 'contact'),
-    path('auth/',views.AUTH,name = 'auth')
+    path('register/',views.HandleRegister,name = 'register'),
+    path('login/',views.HandleLogin,name = 'login')
 ] 
 
 urlpatterns += static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
