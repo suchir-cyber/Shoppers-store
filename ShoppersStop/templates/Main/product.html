@@ -167,11 +167,11 @@
                         <h4 class="sidebar-title">Top Categories</h4>
                         <div class="sidebar-widget-category">
                             <ul>
-                                <li><a href="#" class="selected m-0"> All </a></li>
+                                <li><a href="/products/" class="selected m-0"> All Products </a></li>
 
                                 {% for item in categories%}
 
-                                <li><a href="#" class="selected m-0"> {{item.name}} </a></li>
+                                <li><a href="/products/?categories={{item.id}}" class="selected m-0"> {{item.name}} </a></li>
                             
                                 {% endfor %}
                             

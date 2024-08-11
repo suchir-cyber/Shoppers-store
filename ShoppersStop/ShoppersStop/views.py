@@ -17,6 +17,14 @@ def PRODUCT(request):
     prices = Filter_Price.objects.all()
     color = Color.objects.all()
     brand = Brand.objects.all()
+    CATID = request.GET.get('categories')
+
+    if CATID:
+        products = Product.objects.filter(categories = CATID)
+    else:
+        products = Product.objects.filter(status = 'Publish')
+
+
     context = {
         'products' : products,
         'categories' : categories,
