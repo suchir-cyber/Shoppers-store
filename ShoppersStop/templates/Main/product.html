@@ -28,12 +28,14 @@
                         <div class="header-bottom-set dropdown">
                             <button class="dropdown-toggle header-action-btn" data-bs-toggle="dropdown">Default <i class="fa fa-angle-down"></i></button>
                             <ul class="dropdown-menu dropdown-menu-right">
-                                <li><a class="dropdown-item" href="#">Name, A to Z</a></li>
-                                <li><a class="dropdown-item" href="#">Name, Z to A</a></li>
-                                <li><a class="dropdown-item" href="#">Price, low to high</a></li>
-                                <li><a class="dropdown-item" href="#">Price, high to low</a></li>
-                                <li><a class="dropdown-item" href="#">Sort By new</a></li>
-                                <li><a class="dropdown-item" href="#">Sort By old</a></li>
+                                {% for item in products %}
+                                <li><a class="dropdown-item" href="/products/?ATOZ={{item.id}}">Name, A to Z</a></li>
+                                <li><a class="dropdown-item" href="/products/?ZTOA={{item.id}}">Name, Z to A</a></li>
+                                <li><a class="dropdown-item" href="/products/?LowToHigh={{item.id}}">Price, low to high</a></li>
+                                <li><a class="dropdown-item" href="/products/?HighToLow={{item.id}}">Price, high to low</a></li>
+                                <li><a class="dropdown-item" href="/products/?New={{item.id}}">Sort By new</a></li>
+                                <li><a class="dropdown-item" href="/products/?Old={{item.id}}">Sort By old</a></li>
+                                {% endfor %}
                             </ul>
                         </div>
                         <!-- Single Wedge Start -->
@@ -78,7 +80,7 @@
                                                         class="pe-7s-shopbag"></i></button>
                                                     <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
                                                             class="pe-7s-like"></i></button>
-                                                    <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
+                                                    <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal-{{forloop.counter}}"><i class="pe-7s-look"></i></button>
                                                     <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
                                                             class="pe-7s-refresh-2"></i></button>
                                                 </div>
@@ -230,11 +232,11 @@
                         <h4 class="sidebar-title">Brands</h4>
                         <div class="sidebar-widget-brand">
                             <ul>
-                                <li><a href="#" class="selected m-0"> All </a></li>
+                                <li><a href="/products/" class="selected m-0"> AllProducts </a></li>
 
                                 {% for item in brand %}
 
-                                <li><a href="#" class="selected m-0"> {{ item.name }} </a></li>
+                                <li><a href="/products/?brand={{item.id}}" class="selected m-0"> {{ item.name }} </a></li>
 
                                 {% endfor %}
                             </ul>
