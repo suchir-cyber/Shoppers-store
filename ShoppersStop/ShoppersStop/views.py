@@ -1,5 +1,7 @@
 from django.shortcuts import render,redirect
 from head.models import Product,Categories,Filter_Price,Color,Brand,Contact
+from django.conf import settings
+from django.core.mail import send_mail
 
 def BASE(request):
     return render(request,'Main/base.html')
@@ -94,7 +96,15 @@ def Contact_Page(request):
             subject = subject,
             message = message
         ) 
-
-        contact.save()
-        return redirect('home')
+        
+        subject = subject
+        message = message
+        email_from = settings.EMAIL_HOST_USER
+        try:
+            send_mail(subject,message,email_from,['suchirpandula@gmail.com'])
+            contact.save()
+            return redirect('home')
+        except:
+            return redirect('contact')
+        
     return render(request,'Main/contact.html')
