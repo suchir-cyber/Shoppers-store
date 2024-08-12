@@ -87,7 +87,7 @@
                                 <!-- Single Wedge End -->
                                 <a href="#offcanvas-cart" class="header-action-btn header-action-btn-cart offcanvas-toggle pr-0">
                                     <i class="pe-7s-shopbag"></i>
-                                    <span class="header-action-num">01</span>
+                                    <span class="header-action-num">{{ request.session.cart | length }}</span>
                                     <!-- <span class="cart-amount">€30.00</span> -->
                                 </a>
                                 <a href="#offcanvas-mobile-menu" class="header-action-btn header-action-btn-menu offcanvas-toggle d-lg-none">
@@ -125,7 +125,7 @@
                                 <!-- Single Wedge End -->
                                 <a href="#offcanvas-cart" class="header-action-btn header-action-btn-cart offcanvas-toggle pr-0">
                                     <i class="pe-7s-shopbag"></i>
-                                    <span class="header-action-num">01</span>
+                                    <span class="header-action-num">{{ request.session.cart | length }}</span>
                                     <!-- <span class="cart-amount">€30.00</span> -->
                                 </a>
                                 <a href="#offcanvas-mobile-menu" class="header-action-btn header-action-btn-menu offcanvas-toggle d-lg-none">
@@ -732,7 +732,10 @@
 {% endfor %}
 <!-- Modal end -->
 <!-- Modal Cart -->
-<div class="modal customize-class fade" id="exampleModal-Cart" tabindex="-1"   aria-hidden="true">
+
+{% for item in products %}
+
+<div class="modal customize-class fade" id="exampleModal-Cart-{{ forloop.counter }}" tabindex="-1"   aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body text-center">
@@ -742,14 +745,18 @@
                 </div>
                 <div class="tt-modal-product">
                     <div class="tt-img">
-                        <img src="assets/images/product-image/1.webp" alt="Modern Smart Phone">
+                        <img src="{{item.image}}" alt="Modern Smart Phone">
                     </div>
-                    <h2 class="tt-title"><a href="#">Modern Smart Phone</a></h2>
+                    <h2 class="tt-title"><a href="#">{{ item.name | truncatewords:10 }}</a></h2>
+                    <br>
+                    <a href="{% url 'cart_add' item.id %}">Add to Cart</a>
                 </div>
             </div>
         </div>
     </div>
 </div>     
+
+{% endfor %}
 <!-- Modal wishlist -->
 <div class="modal customize-class fade" id="exampleModal-Wishlist" tabindex="-1"   aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
