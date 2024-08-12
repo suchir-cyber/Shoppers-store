@@ -5,6 +5,7 @@
 <!-- Mirrored from template.hasthemes.com/hmart/hmart/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Sep 2021 18:04:02 GMT -->
 <head>
     {% load static %}
+    {% load cart_tag %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -334,36 +335,54 @@
                 </div>
                 <div class="body customScroll">
                     <ul class="minicart-product-list">
+
+                        {% if request.session.cart|length < 1 %}
+
+                        <!-- Empty Cart area start -->
+                        <div class="empty-cart-area pb-100px pt-100px">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="cart-heading">
+                                            <h2>Your cart item</h2>
+                                        </div>
+                                        <div class="empty-text-contant text-center">
+                                            <i class="pe-7s-shopbag"></i>
+                                            <h3>There are no more items in your cart</h3>
+                                            <a class="empty-cart-btn" href="{% url 'products' %}">
+                                                <i class="fa fa-arrow-left"> </i> Continue shopping
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Empty Cart area end -->
+                        
+                        {% else %}
+
+                        
+                        {% for key,value in request.session.cart.items %}
+
                         <li>
-                            <a href="single-product.html" class="image"><img src="assets/images/product-image/1.webp" alt="Cart product Image"></a>
+                            <a href="single-product.html" class="image"><img src="{{value.image}}" alt="Cart product Image"></a>
                             <div class="content">
-                                <a href="single-product.html" class="title">Modern Smart Phone</a>
-                                <span class="quantity-price">1 x <span class="amount">$18.86</span></span>
-                                <a href="#" class="remove">×</a>
+                                <a href="single-product.html" class="title">{{value.name | truncatewords:10}}</a>
+                                <span class="quantity-price">{{value.quantity}} x <span class="amount">${{value.price}}</span></span>
+                                <a href="{% url 'item_clear' key %}" class="remove">×</a>
                             </div>
                         </li>
-                        <li>
-                            <a href="single-product.html" class="image"><img src="assets/images/product-image/2.webp" alt="Cart product Image"></a>
-                            <div class="content">
-                                <a href="single-product.html" class="title">Bluetooth Headphone</a>
-                                <span class="quantity-price">1 x <span class="amount">$43.28</span></span>
-                                <a href="#" class="remove">×</a>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="single-product.html" class="image"><img src="assets/images/product-image/3.webp" alt="Cart product Image"></a>
-                            <div class="content">
-                                <a href="single-product.html" class="title">Smart Music Box</a>
-                                <span class="quantity-price">1 x <span class="amount">$37.34</span></span>
-                                <a href="#" class="remove">×</a>
-                            </div>
-                        </li>
+
+                        {% endfor %}
+
+                        {% endif %}
+                    
                     </ul>
                 </div>
                 <div class="foot">
                     <div class="buttons mt-30px">
-                        <a href="cart.html" class="btn btn-dark btn-hover-primary mb-30px">view cart</a>
-                        <a href="checkout.html" class="btn btn-outline-dark current-btn">checkout</a>
+                        <a href="{% url 'cart_detail' %}" class="btn btn-dark btn-hover-primary mb-30px">view cart</a>
+                        <a href="{% url 'checkout' %}" class="btn btn-outline-dark current-btn">checkout</a>
                     </div>
                 </div>
             </div>
@@ -745,7 +764,7 @@
                 </div>
                 <div class="tt-modal-product">
                     <div class="tt-img">
-                        <img src="{{item.image}}" alt="Modern Smart Phone">
+                        <img src="/{{item.image}}" alt="Modern Smart Phone">
                     </div>
                     <h2 class="tt-title"><a href="#">{{ item.name | truncatewords:10 }}</a></h2>
                     <br>
