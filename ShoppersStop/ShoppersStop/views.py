@@ -126,6 +126,7 @@ def HandleRegister(request):
         customer = User.objects.create_user(username,email,pass1)
         customer.first_name = first_name
         customer.last_name = last_name
+        customer.email = email
         customer.save()
         return redirect('register')
     return render(request,'Registration/auth.html')
