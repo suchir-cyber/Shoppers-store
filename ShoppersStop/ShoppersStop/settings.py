@@ -137,8 +137,8 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-RAZORPAY_KEY_ID = '#############33'
-RAZORPAY_KEY_SECRET = '#############3'
+RAZORPAY_KEY_ID = 'rzp_test_cxTCRhBSQEYrjU'
+RAZORPAY_KEY_SECRET = '3tQG4YF3itjV1uGKBw7GSut2'
 
 
 EMAIL_USE_TLS = True

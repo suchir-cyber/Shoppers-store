@@ -113,7 +113,7 @@
                                 <div class="your-order-total">
                                     <ul>
                                         <li class="order-total">Total</li>
-                                        <li>${{ cart_total_amount}}</li>
+                                        <li><input value="{{ cart_total_amount}}" name="amount" readonly></li>
                                     </ul>
                                 </div>
                             </div>
@@ -159,7 +159,7 @@
                             </div>
                         </div>
                         <div class="Place-order mt-25">
-                            <a class="btn-hover" href="#"><button type="submit" class="text-light">Continue</button></a>
+                            <a class="btn-hover" href="{% url 'place_order' %}"><button type="submit" class="text-light">Continue</button></a>
                         </div>
                     </div>
                 </div>

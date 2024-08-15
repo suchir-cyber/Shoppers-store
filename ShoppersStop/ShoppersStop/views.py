@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from head.models import Product,Categories,Filter_Price,Color,Brand,Contact
+from head.models import Product,Categories,Filter_Price,Color,Brand,Contact,Order
 from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
