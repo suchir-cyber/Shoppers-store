@@ -200,8 +200,13 @@ def cart_detail(request):
     return render(request, 'Cart/cart_details.html')
 
 def check_out(request):
+    amount_str = request.POST.get('amount')
+    amount_float = float(amount_str)
+    amount = int(amount_float)
+    print(amount)
+    print(type(amount))
     payment = client.order.create({
-        "amount": 50000,
+        "amount": amount,
         "currency": "INR",
         "payment_capture": "1"
     })
@@ -231,9 +236,6 @@ def PLACE_ORDER(request):
         amount = request.POST.get('amount')
         print(cart)
 
-        context = {
-            "order_id" : order_id
-        }
 
         order = Order(
             user = user,
@@ -265,6 +267,9 @@ def PLACE_ORDER(request):
                 total = total   
             )
             item.save()
+    context = {
+        "order_id" : order_id
+    }        
 
     return render(request,'Cart/placeorder.html',context)
 
@@ -284,3 +289,10 @@ def success(request):
         user.save()
 
     return render(request,'Cart/thank_you.html')
+
+
+def Your_Order(request):
+    uid = request.session.get('_auth_user_id')
+    user = User.objects.get(id = uid)
+    print(user)
+    return render(request,'Main/your_order.html')
