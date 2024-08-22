@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from cart.cart import Cart
 import razorpay 
+from django.views.decorators.csrf import csrf_exempt
 
 
 client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID,settings.RAZORPAY_KEY_SECRET))
@@ -230,6 +231,10 @@ def PLACE_ORDER(request):
         amount = request.POST.get('amount')
         print(cart)
 
+        context = {
+            "order_id" : order_id
+        }
+
         order = Order(
             user = user,
             first_name = firstname,
@@ -261,4 +266,21 @@ def PLACE_ORDER(request):
             )
             item.save()
 
-    return render(request,'Cart/placeorder.html')
+    return render(request,'Cart/placeorder.html',context)
+
+
+@csrf_exempt
+def success(request):
+    if request.method == "POST":
+        a = request.POST
+        order_id = ""
+        for key,val in a.items():
+            if key == 'razorpay_order_id':
+                order_id = val
+                break
+        
+        user = Order.objects.filter(payment_id = order_id).first()
+        user.paid = True
+        user.save()
+
+    return render(request,'Cart/thank_you.html')
