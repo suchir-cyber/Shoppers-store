@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from head.models import Product,Categories,Filter_Price,Color,Brand,Contact,Order
+from head.models import Product,Categories,Filter_Price,Color,Brand,Contact,Order,OrderItem
 from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
@@ -213,10 +213,52 @@ def check_out(request):
 
 def PLACE_ORDER(request):
     if request.method == "POST":
+        uid = request.session.get('_auth_user_id')
+        user = User.objects.get(id = uid)
+        cart = request.session.get('cart')
         firstname = request.POST.get('firstname')
+        lastname = request.POST.get('lastname')
+        country = request.POST.get('country')
+        address = request.POST.get('address')
+        city = request.POST.get('city')
+        state = request.POST.get('state')
+        postcode = request.POST.get('postcode')
+        phone = request.POST.get('phone')
+        email = request.POST.get('email')
         order_id = request.POST.get('order_id')
         payment = request.POST.get('payment')
-        print(order_id)
-        print(payment)
-        print(firstname)
+        amount = request.POST.get('amount')
+        print(cart)
+
+        order = Order(
+            user = user,
+            first_name = firstname,
+            last_name = lastname,
+            country = country,
+            address = address,
+            city = city,
+            state = state,
+            postcode = postcode,
+            phone = phone,
+            email = email,
+            payment_id = order_id,
+            amount = amount
+        )
+        order.save()
+
+        for i in cart:
+            a = cart[i]['quantity']
+            b = (int(cart[i]['price']))
+            total = a*b
+
+            item = OrderItem(
+                order = order,
+                product = cart[i]['name'],
+                image = cart[i]['image'],
+                Quantity = cart[i]['quantity'],
+                price = cart[i]['price'],
+                total = total   
+            )
+            item.save()
+
     return render(request,'Cart/placeorder.html')
